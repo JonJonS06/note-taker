@@ -1,6 +1,6 @@
-const router = require('express').router();
+const router = require('express').Router();
 
-const notes = require('../../db/db');
+const notes = require('../../db/notes');
 
 const {
     createNewNote,
@@ -13,7 +13,7 @@ router.get('notes', (req, res) => {
     res.json(saved);
 });
 
-router,post('/notes', (req, res) => {
+router.post('/notes', (req, res) => {
     req.body.id = notes.length.toString();
     let note = createNewNote(req.body, notes);
     res.json(notes);
