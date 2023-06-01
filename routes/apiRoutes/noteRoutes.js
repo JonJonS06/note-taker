@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const notes = require('../../db/notes');
+let notesArray = require('../../db/notes');
 
 const {
     createNewNote,
@@ -8,20 +8,23 @@ const {
 } = require('../../lib/noteFunctions');
 
 
-router.get('notes', (req, res) => {
-    let saved = notes;
+router.get('/notes', (req, res) => {
+    let saved = notesArray;
     res.json(saved);
 });
 
 router.post('/notes', (req, res) => {
-    req.body.id = notes.length.toString();
-    let note = createNewNote(req.body, notes);
-    res.json(notes);
+    if(notesArray){
+    req.body.id = notesArray.length.toString();
+    } else
+    {req.body.id = 0}
+    res.json(createNewNote(req.body, notesArray));
 });
 
-router.delete('/notes/:id', (req, res) => {
-    deleteNote(notes, req.params.id);
-    res.json(notes);
+router.delete('/notes/:id', async (req, res) => {
+    const { id } = req.params
+    notesArray = await deleteNote(id, notesArray);
+    res.json(notesArray);
 });
 
 
