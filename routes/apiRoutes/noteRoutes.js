@@ -4,22 +4,18 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 let data = require('../../db/notes.json');
 
-// const {
-//     createNewNote,
-//     deleteNote
-// } = require('../../lib/noteFunctions');
-
 
 router.get('/notes', (req, res) => {
-    console.log({ data });
-    res.json(data);
+    console.log('from get route', { data });
+    res.json(data.notes);
 });
 
 router.post('/notes', (req, res) => {
     const newNote = { ...req.body, id: uuidv4() };
     console.log(newNote);
     console.log(req.body);
-    data.unshift(newNote);
+    console.log('ldshfgdodihfsdo', data.notes);
+    data.notes.unshift(newNote);
     fs.writeFile(
         path.join(__dirname, '../../db/notes.json'),
         JSON.stringify(data),
