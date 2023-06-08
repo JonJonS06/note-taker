@@ -16,3 +16,4 @@ Note Page:
 https://thawing-garden-07378.herokuapp.com/
 
 ## Github Repository Link
+https://github.com/JonJonS06/note-taker.git
