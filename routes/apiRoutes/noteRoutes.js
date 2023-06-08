@@ -7,15 +7,15 @@ let data = require('../../db/notes.json');
 
 router.get('/notes', (req, res) => {
     console.log('from get route', { data });
-    res.json(data.notes);
+    res.json(data);
 });
 
 router.post('/notes', (req, res) => {
     const newNote = { ...req.body, id: uuidv4() };
     console.log(newNote);
     console.log(req.body);
-    console.log('ldshfgdodihfsdo', data.notes);
-    data.notes.unshift(newNote);
+    console.log('ldshfgdodihfsdo', data);
+    data.unshift(newNote);
     fs.writeFile(
         path.join(__dirname, '../../db/notes.json'),
         JSON.stringify(data),
